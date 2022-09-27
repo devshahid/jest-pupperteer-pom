@@ -1,0 +1,30 @@
+{
+  "name": "jest-pupperteer-new-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "google-test": "jest -i Tests/Homepage.test.js -t \"Testing google page\"",
+    "test-new": "jest -t",
+    "login-test": "jest -t \"Login User\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-jest": "^29.0.3",
+    "jest": "^29.0.3",
+    "jest-puppeteer": "^6.1.1",
+    "puppeteer": "^18.0.5"
+  },
+  "dependencies": {
+    "@types/jest": "^29.0.3",
+    "json-merger": "^1.1.9",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "nested-property": "^4.0.0"
+  }
+}
