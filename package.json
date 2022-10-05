@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "google-test": "jest -i Tests/Homepage.test.js -t \"Testing google page\"",
     "test-new": "jest -t",
     "login-test": "jest -t \"Login User\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Shahid Qureshi",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.19.1",
