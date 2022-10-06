@@ -5,7 +5,15 @@ module.exports = {
   },
   verbose: true,
   setupFilesAfterEnv: ['./jest.setup.js'],
-
-  // roots: ["specs"],
+  reporters: [
+    'default',
+    [
+      './node_modules/jest-html-reporter',
+      {
+        pageTitle: 'Test Report',
+        outputPath: './output/index.html',
+        includeFailureMsg: true,
+      },
+    ],
+  ],
 };
-// add configurations

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test_pattern": "npm test -- --runInBand --verbose --t"
+    "test_pattern": "npm test -- --runInBand --verbose --t",
+    "test:CI": "set CI=true && npm run test_pattern --env=jsdom --testResultsProcessor=./node_modules/jest-html-reporter"
   },
   "keywords": [],
   "author": "Shahid Qureshi",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@types/jest": "^29.0.3",
+    "jest-html-reporter": "^3.7.0",
     "json-merger": "^1.1.9",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
