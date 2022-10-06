@@ -1,6 +1,7 @@
 const CommonUtils = require('./utils/common');
 
 jest.setTimeout(30000);
+jest.retryTimes(5);
 beforeAll(async () => {
   CommonUtils.loadLocatorsAndTestData();
   let cookies = [
