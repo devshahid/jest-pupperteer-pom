@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "google-test": "jest -i Tests/Homepage.test.js -t \"Testing google page\"",
-    "test-new": "jest -t",
-    "login-test": "jest -t \"Login User\""
+    "test_pattern": "npm test -- --runInBand --verbose --t"
   },
   "keywords": [],
   "author": "Shahid Qureshi",

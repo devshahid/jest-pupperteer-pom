@@ -1,6 +1,27 @@
 {
   "Login": {
     "username": "#user-name",
-    "password": "#password"
+    "firstItem_title": "#item_4_title_link > div",
+    "firstItem_description": "#inventory_container > div > div:nth-child(1) > div.inventory_item_description > div.inventory_item_label > div",
+    "firstItem_amount": "#inventory_container > div > div:nth-child(1) > div.inventory_item_description > div.pricebar > div",
+    "firstItem_AddCart": "#add-to-cart-sauce-labs-backpack",
+    "shopping_cart": "#shopping_cart_container > a",
+    "shopping_cart_count": "#shopping_cart_container > a > span",
+    "checkoutBtn": "#checkout",
+    "continueBtn": "#continue",
+    "firstItem_orderDescription": "#checkout_summary_container > div > div.cart_list > div.cart_item > div.cart_item_label > div.inventory_item_desc",
+    "firstItem_orderAmount": "#checkout_summary_container > div > div.cart_list > div.cart_item > div.cart_item_label > div.item_pricebar > div",
+    "finishBtn": "#finish",
+    "orderComplete_Title": "#checkout_complete_container > h2",
+    "orderComplete_Description": "#checkout_complete_container > div",
+    "sideBtn": "#react-burger-menu-btn",
+    "logoutBtn": "#logout_sidebar_link",
+
+    "firstNameField": "#first-name",
+    "lastNameField": "#last-name",
+    "zipCodeField": "#postal-code",
+
+    "password": "#password",
+    "loginBtn": "#login-button"
   }
 }

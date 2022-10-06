@@ -1,9 +1,9 @@
 module.exports = {
   launch: {
     headless: false,
-    args: ["--window-size=1920,1080"],
-    slowMo: 500,
-    // devtools: true,
+    args: ['--start-maximized'],
+    slowMo: 50,
+    devtools: false,
   },
-  browser: "chrome",
+  browser: 'chromium',
 };

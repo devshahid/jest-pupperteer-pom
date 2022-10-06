@@ -1,4 +1,4 @@
-const nestedProperty = require("nested-property");
+const nestedProperty = require('nested-property');
 
 class TestData {
   constructor() {
@@ -15,14 +15,11 @@ class TestData {
     }
   };
   getLocator = (field) => {
-    return nestedProperty.get(this.testData, "LocatorList." + field);
+    return nestedProperty.get(this.testData, 'LocatorList.' + field);
   };
   getData = (field) => {
-    if (
-      typeof nestedProperty.get(this.testData, "DataList." + field) !==
-      "undefined"
-    )
-      return nestedProperty.get(this.testData, "DataList." + field);
+    if (typeof nestedProperty.get(this.testData, 'DataList.' + field) !== 'undefined')
+      return nestedProperty.get(this.testData, 'DataList.' + field);
     else return field;
   };
 }
