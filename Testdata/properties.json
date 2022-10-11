@@ -3,5 +3,14 @@
   "product_amount1": "$29.99",
   "orderSuccess_Title": "THANK YOU FOR YOUR ORDER",
   "orderSuccess_desc": "Your order has been dispatched, and will arrive just as fast as the pony can get there!",
-  "product_description1": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection."
+  "product_description1": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+  "Flipkart": {
+    "product1_title_text": "Noise Fit Buzz with 1.32inch HD Round Screen, Bluetooth calling and SPO2 Smartwatch",
+    "product1_price_text": "₹2,899"
+  },
+  "Amazon": {
+    "product_1_title": "Samsung Galaxy M32 Prime Edition (Light Blue, 6GB RAM, 128GB)",
+    "invalidPassword_Text": "Your password is incorrect",
+    "invalidEmail_Text": "We cannot find an account with that email address"
+  }
 }

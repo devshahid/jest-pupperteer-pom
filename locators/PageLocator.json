@@ -23,5 +23,36 @@
 
     "password": "#password",
     "loginBtn": "#login-button"
+  },
+  "FlipKart": {
+    "searchBar": "#container > div > div._1kfTjk > div._1rH5Jn > div._2Xfa2_ > div._1cmsER > form > div > div > input",
+    "searchBtn": "#container > div > div._1kfTjk > div._1rH5Jn > div._2Xfa2_ > div._1cmsER > form > div > button",
+    "product1_price": "#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(2) > div > div > div > a > div._3pLy-c.row > div.col.col-5-12.nlI3QM > div._3tbKJL > div > div._30jeq3._1_WHN1",
+    "product1_title": "#container > div > div._36fx1h._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div:nth-child(2) > div:nth-child(2) > div > div > div > a > div._3pLy-c.row > div.col.col-7-12 > div._4rR01T"
+  },
+  "Amazon": {
+    "searchBar": "//input[@id='twotabsearchtextbox']",
+    "menuItems": "//a[contains(text(),'xxxx')]",
+    "searchBtn": "//input[@id='nav-search-submit-button']",
+    "FilterTitle": "//span[contains(text(),'Filter by price')]",
+    "product_title": "//span[contains(text(),'xxxx')]",
+    "cartCount": "//span[@id='nav-cart-count']",
+    "cartBtn": "//*[@class='nav-cart-icon nav-sprite']",
+    "addToCartBtn": "//input[@id='add-to-cart-button']",
+    "buyNowBtn": "//input[@id='buy-now-button']",
+    "checkoutBtn": "//input[@value='Proceed to checkout']",
+    "closeBtn": "//a[@id='attach-close_sideSheet-link']",
+    "proceedToCheckout": "//button[contains(text(),'Proceed to checkout')]",
+    "doneBtn": "//span[contains(text(),'DONE')]",
+    "loginAction": "//span[contains(text(),'xxxx')]",
+    "NoAccountFound": "//h4[contains(text(),'No account found with that Email address')]",
+    "EmailOrPhoneLabel": "//label[contains(text(),'Email or phone number')]",
+    "inputFieldEmailSignIn": "//input[@id='ap_email']",
+    "SignInLabel": "//h1[contains(text(),'Sign in')]",
+    "title_text": "//label[contains(text(),'xxxx')]",
+    "continueBtn": "//input[@id='xxxx']",
+    "homeSignIn": "//span[@id='nav-link-accountList-nav-line-1']",
+    "invalidCredentials_title": "//h4[contains(text(),'There was a problem')]",
+    "invalidCredentials_desc": "//span[contains(text(),'xxxx')]"
   }
 }

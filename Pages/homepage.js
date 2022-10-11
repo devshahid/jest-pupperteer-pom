@@ -1,8 +1,7 @@
-const { globals } = require('../jest.config');
 const AppHandler = require('../utils/app_handler');
 class HomePage {
-  async vitispage() {
-    await page.goto(globals.pageurl);
+  async vitispage(pageurl) {
+    await page.goto(pageurl);
   }
 
   async validateUserNameAndPasswordFields() {
@@ -79,6 +78,17 @@ class HomePage {
     await AppHandler.click('Login.sideBtn');
     await AppHandler.assertionToBe('Login.logoutBtn', 'textContent', 'Logout');
     await AppHandler.click('Login.logoutBtn');
+  }
+  async AmazonSignInBtn() {
+    await AppHandler.clickXpath('Amazon.homeSignIn');
+  }
+  async validateInvalidCredentials(invalidCredentials) {
+    await AppHandler.waitForXpath('Amazon.invalidCredentials_desc', invalidCredentials);
+    await AppHandler.assertionToBeWithXpath(
+      'Amazon.invalidCredentials_desc',
+      'innerText',
+      invalidCredentials,
+    );
   }
 }
 module.exports = new HomePage();

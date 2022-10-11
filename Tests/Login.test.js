@@ -1,7 +1,9 @@
 const HomePage = require('../Pages/homepage');
+const { globals } = require('../jest.config');
+
 describe('Enter User Credentials and Purchase product', () => {
   it('Complete order purchase', async () => {
-    await HomePage.vitispage();
+    await HomePage.vitispage(globals.pageurl);
     await HomePage.validateUserNameAndPasswordFields();
     await HomePage.enterLoginDetails();
     await HomePage.clickLoginBtn();
