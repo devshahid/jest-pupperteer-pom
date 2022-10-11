@@ -18,22 +18,19 @@ class ProductPage {
     );
   }
   async addProductToCart() {
-    await AppHandler.assertionToBeWithXpath('Amazon.cartCount', 'innerText', '0');
+    // await AppHandler.assertionToBeWithXpath('Amazon.cartCount', 'innerText', '0');
     await AppHandler.clickXpath('Amazon.addToCartBtn');
-    await page.waitForTimeout(4000);
   }
   async checkoutProduct() {
     await AppHandler.clickXpath('Amazon.addToCartBtn');
-    await page.waitForTimeout(2000);
     await AppHandler.clickXpath('Amazon.closeBtn');
-    await page.waitForTimeout(3000);
     await AppHandler.clickXpath('Amazon.cartBtn');
-    await page.waitForTimeout(2000);
     await AppHandler.clickXpath('Amazon.checkoutBtn');
   }
-  async SignIn(text, email) {
+  async SignIn(text, email, buttonType) {
     await AppHandler.waitForXpath('Amazon.title_text', text);
     await AppHandler.typeXpath('Amazon.inputFieldEmailSignIn', email);
+    await AppHandler.clickXpath('Amazon.continueBtn', buttonType);
   }
 }
 module.exports = new ProductPage();

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "single_file": "npm test -- --testPathPattern --verbose",
     "test_pattern": "npm test -- --runInBand --verbose --t"
   },
   "keywords": [],

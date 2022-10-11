@@ -21,7 +21,7 @@ describe('Enter User Credentials and Purchase product', () => {
 
 describe('Login and Logout User', () => {
   it('Take user to the dashboard and return back to login page', async () => {
-    await HomePage.vitispage();
+    await HomePage.vitispage(globals.pageurl);
     await HomePage.validateUserNameAndPasswordFields();
     await HomePage.enterLoginDetails();
     await HomePage.clickLoginBtn();

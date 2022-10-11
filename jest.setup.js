@@ -3,6 +3,7 @@ jest.setTimeout(80000);
 jest.retryTimes(5);
 beforeAll(async () => {
   CommonUtils.loadLocatorsAndTestData();
+  await page.setViewport({ width: 1300, height: 768 });
   let cookies = [
     {
       name: 'cookie1',

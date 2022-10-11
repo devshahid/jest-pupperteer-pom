@@ -57,6 +57,7 @@
     "hamburger": "//a[@id='nav-hamburger-menu']",
     "Hamburger_Items": "//*[@class='hmenu-item'][contains(text(),'xxxx')]",
     "Account_Title": "//h1[contains(text(),'xxxx')]",
-    "card_Title": "//h2[contains(text(),'xxxx')]"
+    "card_Title": "//h2[contains(text(),'xxxx')]",
+    "hello_title": "//span[@id='glow-ingress-line1']"
   }
 }

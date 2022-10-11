@@ -61,9 +61,7 @@ class AppHandler {
    */
   async assertionToBeWithXpath(locator, property, replaceText) {
     this.initializeParams(locator, property, '', replaceText);
-    console.log(this.locator, this.property, this.replaceText);
     const [elementHandle] = await page.$x(this.locator.replace('xxxx', this.replaceText));
-    console.log(elementHandle);
     const propertyHandle = await elementHandle.getProperty(this.property);
     const propertyValue = await propertyHandle.jsonValue();
     expect(propertyValue).toBe(this.replaceText);
