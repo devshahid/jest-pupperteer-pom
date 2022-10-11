@@ -11,7 +11,26 @@ describe('Purchase order from Amazon', () => {
     await HomePage.validateInvalidCredentials('We cannot find an account with that email address');
   });
 });
-
+describe('Search and Buy Product', () => {
+  it('Search for specific product and purhcase it form amazon', async () => {
+    await HomePage.vitispage(globals.pageurl1);
+    await ProductPage.searchProduct('smart watch');
+    await AppHandler.clickXpath('Amazon.product_title', 'Amazon.product_title');
+    await page.waitForTimeout(5000);
+    const pages = await browser.pages();
+    await pages[2].bringToFront();
+    await pages[2].waitForTimeout(5000);
+    await AppHandler.clickXpathWithInstace(pages[2], 'Amazon.addToCartBtn');
+    await AppHandler.clickXpathWithInstace(pages[2], 'Amazon.cartCount');
+    await AppHandler.clickXpathWithInstace(pages[2], 'Amazon.checkoutBtn');
+    await ProductPage.SignInWithInstance(
+      pages[2],
+      'Email or mobile phone number',
+      'abc7777@g.com',
+      'continue',
+    );
+  });
+});
 describe('Login User', () => {
   beforeEach(async () => {
     await HomePage.vitispage(globals.pageurl1);

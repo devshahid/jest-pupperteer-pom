@@ -32,6 +32,11 @@ class ProductPage {
     await AppHandler.typeXpath('Amazon.inputFieldEmailSignIn', email);
     await AppHandler.clickXpath('Amazon.continueBtn', buttonType);
   }
+  async SignInWithInstance(instance, text, email, buttonType) {
+    await AppHandler.waitForXpathWithInstance(instance, 'Amazon.title_text', text);
+    await AppHandler.typeXpathWithInstance(instance, 'Amazon.inputFieldEmailSignIn', email);
+    await AppHandler.clickXpathWithInstace(instance, 'Amazon.continueBtn', buttonType);
+  }
 }
 module.exports = new ProductPage();
 module.exports.ProductPage = ProductPage;

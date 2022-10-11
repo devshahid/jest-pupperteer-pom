@@ -90,8 +90,12 @@ class AppHandler {
    */
   async waitForXpath(locator, replaceText) {
     this.initializeParams(locator, '', '', replaceText);
-    console.log(this.locator, this.replaceText);
+    // console.log(this.locator, this.replaceText);
     await page.waitForXPath(this.locator.replace('xxxx', this.replaceText));
+  }
+  async waitForXpathWithInstance(instance, locator, replaceText) {
+    this.initializeParams(locator, '', '', replaceText);
+    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
   }
   /**
    * This method is used fill the input field of specific locator with the given input value.
@@ -114,6 +118,12 @@ class AppHandler {
     const [selectedElement] = await page.$x(this.locator.replace('xxxx', this.replaceText));
     await selectedElement.type(this.replaceText);
   }
+  async typeXpathWithInstance(instance, locator, replaceText) {
+    this.initializeParams(locator, '', '', replaceText);
+    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
+    const [selectedElement] = await instance.$x(this.locator.replace('xxxx', this.replaceText));
+    await selectedElement.type(this.replaceText);
+  }
   /**
    * This method is used click on locator.
    * @param {*} locator
@@ -131,6 +141,12 @@ class AppHandler {
     this.initializeParams(locator, '', '', replaceText);
     await page.waitForXPath(this.locator.replace('xxxx', this.replaceText));
     const [selectedElement] = await page.$x(this.locator.replace('xxxx', this.replaceText));
+    await selectedElement.click(this.locator);
+  }
+  async clickXpathWithInstace(instance, locator, replaceText) {
+    this.initializeParams(locator, '', '', replaceText);
+    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
+    const [selectedElement] = await instance.$x(this.locator.replace('xxxx', this.replaceText));
     await selectedElement.click(this.locator);
   }
   async waitForPageNavigation() {
