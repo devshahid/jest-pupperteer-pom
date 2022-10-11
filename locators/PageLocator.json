@@ -53,6 +53,10 @@
     "continueBtn": "//input[@id='xxxx']",
     "homeSignIn": "//span[@id='nav-link-accountList-nav-line-1']",
     "invalidCredentials_title": "//h4[contains(text(),'There was a problem')]",
-    "invalidCredentials_desc": "//span[contains(text(),'xxxx')]"
+    "invalidCredentials_desc": "//span[contains(text(),'xxxx')]",
+    "hamburger": "//a[@id='nav-hamburger-menu']",
+    "Hamburger_Items": "//*[@class='hmenu-item'][contains(text(),'xxxx')]",
+    "Account_Title": "//h1[contains(text(),'xxxx')]",
+    "card_Title": "//h2[contains(text(),'xxxx')]"
   }
 }
