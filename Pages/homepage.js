@@ -1,92 +1,101 @@
-const AppHandler = require('../utils/app_handler');
+const Handler = require('../utils/handlers');
+const selector = require('../locators/locators');
 class HomePage {
   async vitispage(pageurl) {
     await page.goto(pageurl);
   }
 
   async validateUserNameAndPasswordFields() {
-    await AppHandler.waitForSelector('Login.username');
-    await AppHandler.waitForSelector('Login.password');
-    await AppHandler.selectElement('Login.username');
-    await AppHandler.assertionToBe('Login.username', 'placeholder', 'Username');
-    await AppHandler.assertionToBe('Login.password', 'placeholder', 'Password');
+    await Handler.waitForSelector(selector.Login.username);
+    await Handler.waitForSelector(selector.Login.password);
+    await Handler.selectElement(selector.Login.username);
+    await Handler.assertionToBe(selector.Login.username, 'placeholder', 'Username');
+    await Handler.assertionToBe(selector.Login.password, 'placeholder', 'Password');
   }
   async enterLoginDetails() {
-    await AppHandler.type('Login.username', 'standard_user');
-    await AppHandler.type('Login.password', 'secret_sauce');
+    await Handler.type(selector.Login.username, 'standard_user');
+    await Handler.type(selector.Login.password, 'secret_sauce');
   }
   async clickLoginBtn() {
-    await AppHandler.click('Login.loginBtn');
+    await Handler.click(selector.Login.loginBtn);
   }
   async validateFirstItemDetails() {
-    await AppHandler.waitForSelector('Login.firstItem_title');
-    await AppHandler.waitForSelector('Login.firstItem_description');
-    await AppHandler.waitForSelector('Login.firstItem_amount');
-    await AppHandler.assertionToBe('Login.firstItem_title', 'textContent', 'product_title1');
-    await AppHandler.assertionToBe(
-      'Login.firstItem_description',
+    await Handler.waitForSelector(selector.Login.firstItem_title);
+    await Handler.waitForSelector(selector.Login.firstItem_description);
+    await Handler.waitForSelector(selector.Login.firstItem_amount);
+    await Handler.assertionToBe(
+      selector.Login.firstItem_title,
       'textContent',
-      'product_description1',
+      'Sauce Labs Backpack',
     );
-    await AppHandler.assertionToBe('Login.firstItem_amount', 'textContent', '$29.99');
+    await Handler.assertionToBe(
+      selector.Login.firstItem_description,
+      'textContent',
+      'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.',
+    );
+    await Handler.assertionToBe(selector.Login.firstItem_amount, 'textContent', '$29.99');
   }
   async additemToCart() {
-    expect(await AppHandler.selectElement('Login.shopping_cart_count')).toBe(null);
-    await AppHandler.click('Login.firstItem_AddCart');
-    await AppHandler.assertionNotToBe('Login.shopping_cart_count', 'textContent');
+    expect(await Handler.selectElement(selector.Login.shopping_cart_count)).toBe(null);
+    await Handler.click(selector.Login.firstItem_AddCart);
+    await Handler.assertionNotToBe(selector.Login.shopping_cart_count, 'textContent');
   }
   async continueToCheckoutPage() {
-    await AppHandler.click('Login.shopping_cart');
+    await Handler.click(selector.Login.shopping_cart);
   }
   async continueToCheckoutProduct() {
-    await AppHandler.click('Login.checkoutBtn');
+    await Handler.click(selector.Login.checkoutBtn);
   }
   async enterShippingDetails() {
-    await AppHandler.type('Login.firstNameField', 'Shahid');
-    await AppHandler.type('Login.lastNameField', 'Qureshi');
-    await AppHandler.type('Login.zipCodeField', '492001');
+    await Handler.type(selector.Login.firstNameField, 'Shahid');
+    await Handler.type(selector.Login.lastNameField, 'Qureshi');
+    await Handler.type(selector.Login.zipCodeField, '492001');
   }
   async continueToOrderConfirmationScreen() {
-    await AppHandler.click('Login.continueBtn');
+    await Handler.click(selector.Login.continueBtn);
   }
 
   async validateOrderDetailsConfirmationScreen() {
-    await AppHandler.assertionToBe('Login.firstItem_title', 'textContent', 'product_title1');
-    await AppHandler.assertionToBe(
-      'Login.firstItem_orderDescription',
+    await Handler.assertionToBe(
+      selector.Login.firstItem_title,
       'textContent',
-      'product_description1',
+      'Sauce Labs Backpack',
     );
-    await AppHandler.assertionToBe('Login.firstItem_orderAmount', 'textContent', 'product_amount1');
+    await Handler.assertionToBe(
+      selector.Login.firstItem_orderDescription,
+      'textContent',
+      'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.',
+    );
+    await Handler.assertionToBe(selector.Login.firstItem_orderAmount, 'textContent', '$29.99');
   }
   async continueToFinishOrderPurchase() {
-    await AppHandler.click('Login.finishBtn');
+    await Handler.click(selector.Login.finishBtn);
   }
   async validateOrderSuccessScreen() {
-    await AppHandler.assertionToBe(
-      'Login.orderComplete_Title',
+    await Handler.assertionToBe(
+      selector.Login.orderComplete_Title,
       'textContent',
-      'orderSuccess_Title',
+      'THANK YOU FOR YOUR ORDER',
     );
-    await AppHandler.assertionToBe(
-      'Login.orderComplete_Description',
+    await Handler.assertionToBe(
+      selector.Login.orderComplete_Description,
       'textContent',
-      'orderSuccess_desc',
+      'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
     );
   }
   async clickOnLogoutBtn() {
-    await AppHandler.click('Login.sideBtn');
-    await AppHandler.assertionToBe('Login.logoutBtn', 'textContent', 'Logout');
-    await AppHandler.click('Login.logoutBtn');
+    await Handler.click(selector.Login.sideBtn);
+    await Handler.assertionToBe(selector.Login.logoutBtn, 'textContent', 'Logout');
+    await Handler.click(selector.Login.logoutBtn);
   }
   async AmazonSignInBtn() {
-    await AppHandler.clickXpath(page, 'Amazon.homeSignIn');
+    await Handler.clickXpath(page, selector.Amazon.homeSignIn);
   }
   async validateInvalidCredentials(invalidCredentials) {
-    await AppHandler.waitForXpath(page, 'Amazon.invalidCredentials_desc', invalidCredentials);
-    await AppHandler.assertionToBeWithXpath(
+    await Handler.waitForXpath(page, selector.Amazon.invalidCredentials_desc(invalidCredentials));
+    await Handler.assertionToBeWithXpath(
       page,
-      'Amazon.invalidCredentials_desc',
+      selector.Amazon.invalidCredentials_desc(invalidCredentials),
       'innerText',
       invalidCredentials,
     );

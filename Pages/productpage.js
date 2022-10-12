@@ -1,17 +1,28 @@
-const AppHandler = require('../utils/app_handler');
+const Handler = require('../utils/handlers');
+const selector = require('../locators/locators');
 class ProductPage {
   async searchProduct(productType) {
-    await AppHandler.waitForXpath(page, 'Amazon.searchBar');
-    await AppHandler.assertionToBeWithXpath(page, 'Amazon.menuItems', 'innerText', 'Best Sellers');
-    await AppHandler.assertionToBeWithXpath(page, 'Amazon.menuItems', 'innerText', 'Mobiles');
-    await AppHandler.typeXpath(page, 'Amazon.searchBar', productType);
-    await AppHandler.clickXpath(page, 'Amazon.searchBtn');
+    await Handler.waitForXpath(page, selector.Amazon.searchBar);
+    await Handler.assertionToBeWithXpath(
+      page,
+      selector.Amazon.menuItems('Best Sellers'),
+      'innerText',
+      'Best Sellers',
+    );
+    await Handler.assertionToBeWithXpath(
+      page,
+      selector.Amazon.menuItems('Mobiles'),
+      'innerText',
+      'Mobiles',
+    );
+    await Handler.typeXpath(page, selector.Amazon.searchBar, productType);
+    await Handler.clickXpath(page, selector.Amazon.searchBtn);
   }
   async waitForNavigation() {
-    await AppHandler.waitForPageNavigation();
+    await Handler.waitForPageNavigation();
   }
   async validateProducts() {
-    await AppHandler.assertionToBeWithXpath(
+    await Handler.assertionToBeWithXpath(
       page,
       'Amazon.product_title',
       'innerText',
@@ -19,24 +30,24 @@ class ProductPage {
     );
   }
   async addProductToCart() {
-    // await AppHandler.assertionToBeWithXpath('Amazon.cartCount', 'innerText', '0');
-    await AppHandler.clickXpath(page, 'Amazon.addToCartBtn');
+    // await Handler.assertionToBeWithXpath('Amazon.cartCount', 'innerText', '0');
+    await Handler.clickXpath(page, selector.Amazon.addToCartBtn);
   }
   async checkoutProduct() {
-    await AppHandler.clickXpath(page, 'Amazon.addToCartBtn');
-    await AppHandler.clickXpath(page, 'Amazon.closeBtn');
-    await AppHandler.clickXpath(page, 'Amazon.cartBtn');
-    await AppHandler.clickXpath(page, 'Amazon.checkoutBtn');
+    await Handler.clickXpath(page, selector.Amazon.addToCartBtn);
+    await Handler.clickXpath(page, selector.Amazon.closeBtn);
+    await Handler.clickXpath(page, selector.Amazon.cartBtn);
+    await Handler.clickXpath(page, selector.Amazon.checkoutBtn);
   }
   async SignIn(instance, text, email, buttonType) {
-    await AppHandler.waitForXpath(instance, 'Amazon.title_text', text);
-    await AppHandler.typeXpath(instance, 'Amazon.inputFieldEmailSignIn', email);
-    await AppHandler.clickXpath(instance, 'Amazon.continueBtn', buttonType);
+    await Handler.waitForXpath(instance, selector.Amazon.title_text(text));
+    await Handler.typeXpath(instance, selector.Amazon.inputFieldEmailSignIn, email);
+    await Handler.clickXpath(instance, selector.Amazon.continueBtn(buttonType));
   }
   async SignInWithInstance(instance, text, email, buttonType) {
-    await AppHandler.waitForXpathWithInstance(instance, 'Amazon.title_text', text);
-    await AppHandler.typeXpathWithInstance(instance, 'Amazon.inputFieldEmailSignIn', email);
-    await AppHandler.clickXpathWithInstace(instance, 'Amazon.continueBtn', buttonType);
+    await Handler.waitForXpathWithInstance(instance, 'Amazon.title_text', text);
+    await Handler.typeXpathWithInstance(instance, 'Amazon.inputFieldEmailSignIn', email);
+    await Handler.clickXpathWithInstace(instance, 'Amazon.continueBtn', buttonType);
   }
 }
 module.exports = new ProductPage();

@@ -1,5 +1,6 @@
 const CommonUtils = require('./common');
-class AppHandler {
+const selector = require('../locators/locators');
+class Handler {
   /**
    * reset this parameter values
    */
@@ -28,8 +29,7 @@ class AppHandler {
    * @param {*} locator
    */
   async selectElement(locator) {
-    this.initializeParams(locator);
-    return await page.$(this.locator);
+    return await page.$(locator);
   }
 
   /**
@@ -49,8 +49,13 @@ class AppHandler {
    */
   async assertionToBe(locator, property, inputValue) {
     let selector = await this.selectElement(locator);
-    this.initializeParams(locator, property, inputValue);
-    expect(await this.getElementProperty(selector, this.property)).toBe(this.inputValue);
+    // console.log(selector);
+    // expect(await this.getElementProperty(selector, property)).toBe(inputValue);
+
+    const [elementHandle] = await page.$(locator);
+    const propertyHandle = await elementHandle.getProperty(property);
+    const propertyValue = await propertyHandle.jsonValue();
+    expect(propertyValue).toBe(inputValue);
   }
 
   /**
@@ -59,12 +64,11 @@ class AppHandler {
    * @param {*} property
    * @param {*} inputValue
    */
-  async assertionToBeWithXpath(instance, locator, property, replaceText) {
-    this.initializeParams(locator, property, '', replaceText);
-    const [elementHandle] = await instance.$x(this.locator.replace('xxxx', this.replaceText));
-    const propertyHandle = await elementHandle.getProperty(this.property);
+  async assertionToBeWithXpath(instance, locator, property, inputValue) {
+    const [elementHandle] = await instance.$x(locator);
+    const propertyHandle = await elementHandle.getProperty(property);
     const propertyValue = await propertyHandle.jsonValue();
-    expect(propertyValue).toBe(this.replaceText);
+    expect(propertyValue).toBe(inputValue);
   }
   /**
    * Everytime get 2 parameters. This method is used to make the assertion case 'not to ToBe'.
@@ -73,68 +77,61 @@ class AppHandler {
    */
   async assertionNotToBe(locator, property) {
     let selector = await this.selectElement(locator);
-    this.initializeParams(locator, property);
-    expect(await this.getElementProperty(selector, this.property)).not.toBeNull();
+    expect(await this.getElementProperty(selector, property)).not.toBeNull();
   }
   /**
    * This method is used wait for the locator for sometime untill it appears on the screen.
    * @param {*} locator
    */
   async waitForSelector(locator) {
-    this.initializeParams(locator);
-    await page.waitForSelector(this.locator);
+    await page.waitForSelector(locator);
   }
   /**
    * This method is used wait for the locator for sometime untill it appears on the screen.
    * @param {*} locator
    */
-  async waitForXpath(instance, locator, replaceText) {
-    this.initializeParams(locator, '', '', replaceText);
-    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
+  async waitForXpath(instance, locator) {
+    await instance.waitForXPath(locator);
   }
   /**
    * This method is used fill the input field of specific locator with the given input value.
    * @param {*} locator
    * @param {*} inputValue
    */
-  async type(locator, inputValue, property = '') {
-    this.initializeParams(locator, property, inputValue);
-    await page.waitForSelector(this.locator);
-    await page.type(this.locator, this.inputValue);
+  async type(locator, inputValue) {
+    await page.waitForSelector(locator);
+    await page.type(locator, inputValue);
   }
   /**
    * This method is used fill the input field of specific locator with the given input value for Xpath.
    * @param {*} locator
    * @param {*} inputValue
    */
-  async typeXpath(instance, locator, replaceText) {
-    this.initializeParams(locator, '', '', replaceText);
-    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
-    const [selectedElement] = await instance.$x(this.locator.replace('xxxx', this.replaceText));
-    await selectedElement.type(this.replaceText);
+  async typeXpath(instance, locator, inputValue) {
+    await instance.waitForXPath(locator);
+    const [selectedElement] = await instance.$x(locator);
+    await selectedElement.type(inputValue);
   }
   /**
    * This method is used click on locator.
    * @param {*} locator
    */
   async click(locator) {
-    this.initializeParams(locator);
-    await page.waitForSelector(this.locator);
-    await page.click(this.locator);
+    await page.waitForSelector(locator);
+    await page.click(locator);
   }
   /**
    * This method is used click on locator of xpath.
    * @param {*} locator
    */
-  async clickXpath(instance, locator, replaceText) {
-    this.initializeParams(locator, '', '', replaceText);
-    await instance.waitForXPath(this.locator.replace('xxxx', this.replaceText));
-    const [selectedElement] = await instance.$x(this.locator.replace('xxxx', this.replaceText));
-    await selectedElement.click(this.locator);
+  async clickXpath(instance, locator) {
+    await instance.waitForXPath(locator);
+    const [selectedElement] = await instance.$x(locator);
+    await selectedElement.click(locator);
   }
   async waitForPageNavigation() {
     await page.waitForNavigation();
   }
 }
 
-module.exports = new AppHandler();
+module.exports = new Handler();

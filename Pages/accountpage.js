@@ -1,10 +1,21 @@
-const AppHandler = require('../utils/app_handler');
+const Handler = require('../utils/handlers');
+const selector = require('../locators/locators');
 class AccountPage {
   async validateItemCard(title, desc) {
-    await AppHandler.waitForXpath(page, 'Amazon.card_Title', title);
-    await AppHandler.assertionToBeWithXpath(page, 'Amazon.card_Title', 'innerText', title);
-    await AppHandler.waitForXpath(page, 'Amazon.product_title', desc);
-    await AppHandler.assertionToBeWithXpath(page, 'Amazon.product_title', 'innerText', desc);
+    await Handler.waitForXpath(page, selector.Amazon.card_Title(title));
+    await Handler.assertionToBeWithXpath(
+      page,
+      selector.Amazon.card_Title(title),
+      'innerText',
+      title,
+    );
+    await Handler.waitForXpath(page, selector.Amazon.product_title(desc));
+    await Handler.assertionToBeWithXpath(
+      page,
+      selector.Amazon.product_title(desc),
+      'innerText',
+      desc,
+    );
   }
 }
 module.exports = new AccountPage();

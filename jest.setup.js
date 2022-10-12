@@ -1,5 +1,5 @@
 const CommonUtils = require('./utils/common');
-jest.setTimeout(80000);
+jest.setTimeout(30000);
 jest.retryTimes(5);
 beforeAll(async () => {
   CommonUtils.loadLocatorsAndTestData();
