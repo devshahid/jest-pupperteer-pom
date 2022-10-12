@@ -80,11 +80,12 @@ class HomePage {
     await AppHandler.click('Login.logoutBtn');
   }
   async AmazonSignInBtn() {
-    await AppHandler.clickXpath('Amazon.homeSignIn');
+    await AppHandler.clickXpath(page, 'Amazon.homeSignIn');
   }
   async validateInvalidCredentials(invalidCredentials) {
-    await AppHandler.waitForXpath('Amazon.invalidCredentials_desc', invalidCredentials);
+    await AppHandler.waitForXpath(page, 'Amazon.invalidCredentials_desc', invalidCredentials);
     await AppHandler.assertionToBeWithXpath(
+      page,
       'Amazon.invalidCredentials_desc',
       'innerText',
       invalidCredentials,
