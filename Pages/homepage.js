@@ -2,7 +2,7 @@ const Handler = require('../utils/handlers');
 const selector = require('../locators/locators');
 class HomePage {
   async vitispage(pageurl) {
-    await page.goto(pageurl);
+    await page.goto(pageurl, { waitUntil: 'networkidle0' });
   }
 
   async validateUserNameAndPasswordFields() {

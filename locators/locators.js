@@ -4,6 +4,7 @@ module.exports = {
     menuItems: (i) => `//a[contains(text(),'${i}')]`,
     searchBtn: `//input[@id='nav-search-submit-button']`,
     FilterTitle: `//span[contains(text(),'Filter by price')]`,
+    product_title_selector: `//span[contains(@class, 'a-size-medium a-color-base a-text-normal')]`,
     product_title: (i) => `//span[contains(text(),'${i}')]`,
     cartCount: `//span[@id='nav-cart-count']`,
     cartBtn: `//*[@class='nav-cart-icon nav-sprite']`,

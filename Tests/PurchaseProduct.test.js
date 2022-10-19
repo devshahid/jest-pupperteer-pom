@@ -16,19 +16,25 @@ describe('Search and Buy Product', () => {
   it('Search for specific product and purhcase it form amazon', async () => {
     await HomePage.vitispage(globals.pageurl1);
     await ProductPage.searchProduct('smart watch');
+
+    //save target of original page to know that this was the opener:
+    const pageTarget = page.target();
+    //execute click on first tab that triggers opening of new tab:
     await Handler.clickXpath(
       page,
       selector.Amazon.product_title(
-        'ZEBRONICS Zeb-Fit 580ch Bluetooth Smart Watch, 4.69cm Capacitive touch screen and 1 button on the Right side,7 Days Data Storage, BP & Heart Rate Monitor, IP67 Waterproof, Multiple Watch Faces (Black)',
+        'Newly launched Biggest Display Zebronics Eternal Bluetooth Calling Smartwatch, 1.85" , Voice Assistant, 10 Built-in & 100+ Watch Faces, 123 Sport Modes, IP67, 8 Menu UI, 4 Games, Calculator (Black)',
       ),
     );
-    await page.waitForTimeout(2000);
-    const pages = await browser.pages();
-    await pages[2].bringToFront();
-    await Handler.clickXpath(pages[2], selector.Amazon.addToCartBtn);
-    await Handler.clickXpath(pages[2], selector.Amazon.cartCount);
-    await Handler.clickXpath(pages[2], selector.Amazon.checkoutBtn);
-    await ProductPage.SignIn(pages[2], 'Email or mobile phone number', 'abc7777@g.com', 'continue');
+    //check that the first page opened this new page:
+    const newTarget = await browser.waitForTarget((target) => target.opener() === pageTarget);
+    //get the new page object:
+    const newPage = await newTarget.page();
+
+    await Handler.clickXpath(newPage, selector.Amazon.addToCartBtn);
+    await Handler.clickXpath(newPage, selector.Amazon.cartCount);
+    await Handler.clickXpath(newPage, selector.Amazon.checkoutBtn);
+    await ProductPage.SignIn(newPage, 'Email or mobile phone number', 'abc7777@g.com', 'continue');
   });
 });
 describe('Login User', () => {

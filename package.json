@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "single_file": "npm test -- --testPathPattern --verbose",
-    "test_pattern": "npm test -- --runInBand --verbose --t"
+    "test_pattern": "npm test -- --runInBand --bail=2 --verbose --t"
   },
   "keywords": [],
   "author": "Shahid Qureshi",
