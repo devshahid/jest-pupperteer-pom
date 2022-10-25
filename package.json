@@ -1,0 +1,27 @@
+{
+  "name": "mocha-chai-puppetteer-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 15000  config.js --recursive test --reporter mochawesome",
+    "test-single": "mocha --timeout 50000 config.js"
+  },
+  "keywords": [],
+  "author": "Shahid Qureshi",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "json-merger": "^1.1.9",
+    "lodash": "^4.17.21",
+    "mochawesome": "^7.1.3",
+    "nested-property": "^4.0.0",
+    "node-cmd": "^5.0.0",
+    "opn": "^6.0.0",
+    "puppeteer": "^19.1.1"
+  }
+}
