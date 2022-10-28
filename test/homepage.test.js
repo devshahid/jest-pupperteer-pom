@@ -1,3 +1,4 @@
+const { expect } = require("chai");
 const selector = require("../locators/locators");
 
 describe("Validate LinkedIn Page", () => {
@@ -20,6 +21,7 @@ describe("Validate LinkedIn Page", () => {
       selector.LinkedIn.signInBtnLabel,
       (el) => el.innerHTML
     );
+
     expect(elementName.replace(/\n/g, "").trim()).to.equal("Sign in");
     elementName = await page.$eval(
       selector.LinkedIn.mainHeading,
@@ -54,15 +56,16 @@ describe("Validate LinkedIn Page", () => {
     await page.waitForSelector(selector.LinkedIn.errorlabels);
     const options = await page.$$eval(
       selector.LinkedIn.errorlabels,
-      (options) => options.map((option) => option.innerHTML)
+      (options) =>
+        options.map((option) => option.innerHTML.replace(/\n/g, "").trim())
     );
-
-    expect(options[0].replace(/\n/g, "").trim()).to.equal(
-      "Please enter your email address or mobile number."
-    );
-    expect(options[1].replace(/\n/g, "").trim()).to.equal(
-      "Please enter your password."
-    );
+    options.sort();
+    let errorMsgs = [
+      "Please enter your email address or mobile number.",
+      "Please enter your password.",
+    ];
+    errorMsgs.sort();
+    expect(options).to.eql(errorMsgs);
   });
 
   it("Sign up - With email and password", async () => {
