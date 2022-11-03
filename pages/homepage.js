@@ -1,6 +1,6 @@
 const Handler = require("../utils/handlers");
 
-class LoginPage {
+class HomePage {
   async getInnerHTML(instance, locator) {
     return await instance.$eval(locator, (el) => el.innerHTML);
   }
@@ -19,5 +19,5 @@ class LoginPage {
     await instance.type(locator, value);
   }
 }
-module.exports = new LoginPage();
-module.exports.LoginPage = LoginPage;
+module.exports = new HomePage();
+module.exports.HomePage = HomePage;

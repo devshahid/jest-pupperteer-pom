@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 15000  config.js --recursive test --reporter mochawesome",
+    "test": "mocha --reporter mochawesome",
     "test-single": "mocha --timeout 50000 config.js --reporter mochawesome",
     "test-test": "mocha --reporter mochawesome",
     "test-pattern": "mocha --grep \"Validate LinkedIn Page\" --timeout 50000 config.js --reporter mochawesome"

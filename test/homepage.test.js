@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const selector = require("../locators/locators");
-const LoginPage = require("../pages/loginpage");
 const Handler = require("../utils/handlers");
 describe("Validate LinkedIn Page", () => {
   let page, elementName;
@@ -13,17 +12,17 @@ describe("Validate LinkedIn Page", () => {
     await page.close();
   });
   it("Validate page elements", async () => {
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.joinNowBtnLabel
     );
     await Handler.assertionEquals(elementName, "Join now");
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.signInBtnLabel
     );
     await Handler.assertionEquals(elementName, "Sign in");
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.mainHeading
     );
@@ -31,17 +30,17 @@ describe("Validate LinkedIn Page", () => {
       elementName,
       "Welcome to your professional community"
     );
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.emailPhoneNumberInputLabel
     );
     await Handler.assertionEquals(elementName, "Email or phone number");
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.passwordLabel
     );
     await Handler.assertionEquals(elementName, "Password");
-    elementName = await LoginPage.getInnerHTML(
+    elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.forgetPasswordLabel
     );
@@ -49,11 +48,11 @@ describe("Validate LinkedIn Page", () => {
   });
 
   it("Sign up - Without email and password", async () => {
-    await LoginPage.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
-    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
-    await LoginPage.waitForSelector(page, selector.LinkedIn.errorlabels);
+    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(page, selector.LinkedIn.errorlabels);
 
-    const options = await LoginPage.getArrayOfInnerHTML(
+    const options = await Handler.getArrayOfInnerHTML(
       page,
       selector.LinkedIn.errorlabels
     );
@@ -67,32 +66,32 @@ describe("Validate LinkedIn Page", () => {
   });
 
   it("Sign up - With email and password", async () => {
-    await LoginPage.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
-    await LoginPage.TypeOnLocator(
+    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await Handler.TypeOnLocator(
       page,
       selector.LinkedIn.InputField("email-or-phone"),
       "testing0909876@gmail.com"
     );
-    await LoginPage.TypeOnLocator(
+    await Handler.TypeOnLocator(
       page,
       selector.LinkedIn.InputField("password"),
       "0909876learning"
     );
-    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
-    await LoginPage.waitForSelector(
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(
       page,
       selector.LinkedIn.InputField("first-name")
     );
-    await LoginPage.TypeOnLocator(
+    await Handler.TypeOnLocator(
       page,
       selector.LinkedIn.InputField("first-name"),
       "learning"
     );
-    await LoginPage.TypeOnLocator(
+    await Handler.TypeOnLocator(
       page,
       selector.LinkedIn.InputField("last-name"),
       "tester"
     );
-    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
   });
 });
