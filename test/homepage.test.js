@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const selector = require("../locators/locators");
-
+const LoginPage = require("../pages/loginpage");
+const Handler = require("../utils/handlers");
 describe("Validate LinkedIn Page", () => {
   let page, elementName;
   beforeEach(async () => {
@@ -12,52 +13,49 @@ describe("Validate LinkedIn Page", () => {
     await page.close();
   });
   it("Validate page elements", async () => {
-    elementName = await page.$eval(
-      selector.LinkedIn.joinNowBtnLabel,
-      (el) => el.innerHTML
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.joinNowBtnLabel
     );
-    expect(elementName.replace(/\n/g, "").trim()).to.equal("Join now");
-    elementName = await page.$eval(
-      selector.LinkedIn.signInBtnLabel,
-      (el) => el.innerHTML
+    await Handler.assertionEquals(elementName, "Join now");
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.signInBtnLabel
     );
-
-    expect(elementName.replace(/\n/g, "").trim()).to.equal("Sign in");
-    elementName = await page.$eval(
-      selector.LinkedIn.mainHeading,
-      (el) => el.innerHTML
+    await Handler.assertionEquals(elementName, "Sign in");
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.mainHeading
     );
-    expect(elementName.replace(/\n/g, "").trim()).to.equal(
+    await Handler.assertionEquals(
+      elementName,
       "Welcome to your professional community"
     );
-    elementName = await page.$eval(
-      selector.LinkedIn.emailPhoneNumberInputLabel,
-      (el) => el.innerHTML
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.emailPhoneNumberInputLabel
     );
-    expect(elementName.replace(/\n/g, "").trim()).to.equal(
-      "Email or phone number"
+    await Handler.assertionEquals(elementName, "Email or phone number");
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.passwordLabel
     );
-    elementName = await page.$eval(
-      selector.LinkedIn.passwordLabel,
-      (el) => el.innerHTML
+    await Handler.assertionEquals(elementName, "Password");
+    elementName = await LoginPage.getInnerHTML(
+      page,
+      selector.LinkedIn.forgetPasswordLabel
     );
-    expect(elementName.replace(/\n/g, "").trim()).to.equal("Password");
-    elementName = await page.$eval(
-      selector.LinkedIn.forgetPasswordLabel,
-      (el) => el.innerHTML
-    );
-    expect(elementName.replace(/\n/g, "").trim()).to.equal("Forgot password?");
+    await Handler.assertionEquals(elementName, "Forgot password?");
   });
 
   it("Sign up - Without email and password", async () => {
-    const pageTarget = page.target();
-    await page.click(selector.LinkedIn.joinNowBtnLabel);
-    await page.click(selector.LinkedIn.continueBtn);
-    await page.waitForSelector(selector.LinkedIn.errorlabels);
-    const options = await page.$$eval(
-      selector.LinkedIn.errorlabels,
-      (options) =>
-        options.map((option) => option.innerHTML.replace(/\n/g, "").trim())
+    await LoginPage.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
+    await LoginPage.waitForSelector(page, selector.LinkedIn.errorlabels);
+
+    const options = await LoginPage.getArrayOfInnerHTML(
+      page,
+      selector.LinkedIn.errorlabels
     );
     options.sort();
     let errorMsgs = [
@@ -69,19 +67,32 @@ describe("Validate LinkedIn Page", () => {
   });
 
   it("Sign up - With email and password", async () => {
-    await page.click(selector.LinkedIn.joinNowBtnLabel);
-    await page.type(
+    await LoginPage.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await LoginPage.TypeOnLocator(
+      page,
       selector.LinkedIn.InputField("email-or-phone"),
       "testing0909876@gmail.com"
     );
-    await page.type(
+    await LoginPage.TypeOnLocator(
+      page,
       selector.LinkedIn.InputField("password"),
       "0909876learning"
     );
-    await page.click(selector.LinkedIn.continueBtn);
-    await page.waitForSelector(selector.LinkedIn.InputField("first-name"));
-    await page.type(selector.LinkedIn.InputField("first-name"), "learning");
-    await page.type(selector.LinkedIn.InputField("last-name"), "tester");
-    await page.click(selector.LinkedIn.continueBtn);
+    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
+    await LoginPage.waitForSelector(
+      page,
+      selector.LinkedIn.InputField("first-name")
+    );
+    await LoginPage.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("first-name"),
+      "learning"
+    );
+    await LoginPage.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("last-name"),
+      "tester"
+    );
+    await LoginPage.clickLocator(page, selector.LinkedIn.continueBtn);
   });
 });
