@@ -1,5 +1,4 @@
 const { expect } = require("chai");
-const selector = require("../locators/locators");
 class Handler {
   async getInnerHTML(instance, locator) {
     return await instance.$eval(locator, (el) => el.innerHTML);
