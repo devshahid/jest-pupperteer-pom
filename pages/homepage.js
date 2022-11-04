@@ -1,11 +1,11 @@
 const selector = require("../locators/locators");
 const Handler = require("../utils/handlers");
 class Homepage {
+  elementName = "";
   async visitpage(page, url) {
-    console.log(url);
     await page.goto(url);
   }
-  async navigateToRegisterScreen(page, action) {
+  async navigateToActionScreen(page, action) {
     await Handler.clickLocatorXpath(
       page,
       selector.ecommerce.menuitem("My Account")
@@ -16,29 +16,27 @@ class Homepage {
     );
   }
   async validateRegisterScreen(page) {
-    let elementName;
     await Handler.waitForSelector(page, selector.ecommerce.title_heading);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_heading
     );
-    await Handler.assertionEquals(elementName, "Register Account");
-    elementName = await Handler.getInnerHTML(
+    await Handler.assertionEquals(this.elementName, "Register Account");
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_desc
     );
     await Handler.assertionInclude(
-      elementName,
+      this.elementName,
       "If you already have an account with us, please login at the"
     );
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.desc_heading
     );
-    await Handler.assertionEquals(elementName, "Your Personal Details");
+    await Handler.assertionEquals(this.elementName, "Your Personal Details");
   }
   async validateRegisterElements(page) {
-    let elementName;
     let elementArr = [
       "firstname",
       "lastname",
@@ -56,11 +54,11 @@ class Homepage {
       "Password Confirm",
     ];
     for (let i in elementArr) {
-      elementName = await Handler.getInnerHTML(
+      this.elementName = await Handler.getInnerHTML(
         page,
         selector.ecommerce.register_fields(elementArr[i])
       );
-      await Handler.assertionEquals(elementName, elementText[i]);
+      await Handler.assertionEquals(this.elementName, elementText[i]);
     }
   }
   async navigateToCart(page) {
@@ -77,13 +75,17 @@ class Homepage {
       selector.ecommerce.itemsList(product)
     );
     await Handler.waitForSelector(page, selector.ecommerce.itemHeading);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.itemHeading
     );
-    await Handler.assertionEquals(elementName, product);
+    await Handler.assertionEquals(this.elementName, product);
   }
   async addProductToWishList(page) {
+    await Handler.waitForSelector(
+      page,
+      selector.ecommerce.addToFavBtn("Add to Wish List")
+    );
     await Handler.clickLocator(
       page,
       selector.ecommerce.addToFavBtn("Add to Wish List")
@@ -95,19 +97,19 @@ class Homepage {
   }
   async removeItemFromFav(page) {
     await Handler.waitForSelector(page, selector.ecommerce.loginElements);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.loginElements
     );
-    await Handler.assertionEquals(elementName, "My Wish List");
+    await Handler.assertionEquals(this.elementName, "My Wish List");
     await Handler.waitForSelector(page, selector.ecommerce.removeBtn);
     await Handler.clickLocator(page, selector.ecommerce.removeBtn);
     await Handler.waitForSelector(page, selector.ecommerce.title_desc);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_desc
     );
-    await Handler.assertionEquals(elementName, "Your wish list is empty.");
+    await Handler.assertionEquals(this.elementName, "Your wish list is empty.");
   }
   async addProductToCart(page) {
     await Handler.clickLocator(page, selector.ecommerce.addToCartBtn);
@@ -120,64 +122,67 @@ class Homepage {
     await Handler.waitForSelector(page, selector.ecommerce.itemRemoveBtn);
     await Handler.clickLocator(page, selector.ecommerce.itemRemoveBtn);
     await Handler.waitForSelector(page, selector.ecommerce.title_desc);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_desc
     );
-    await Handler.assertionEquals(elementName, "Your shopping cart is empty!");
+    await Handler.assertionEquals(
+      this.elementName,
+      "Your shopping cart is empty!"
+    );
   }
   async navigateToCartNavLink(page) {
+    await Handler.waitForSelector(page, selector.ecommerce.cartNavLink);
     await Handler.clickLocator(page, selector.ecommerce.cartNavLink);
     await Handler.waitForSelector(page, selector.ecommerce.title_heading);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_heading
     );
-    await Handler.assertionInclude(elementName, "Shopping Cart");
+    await Handler.assertionInclude(this.elementName, "Shopping Cart");
   }
   async navigateToCheckout(page) {
     await Handler.waitForSelector(page, selector.ecommerce.title_heading);
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.ecommerce.title_heading
     );
-    await Handler.assertionEquals(elementName, "Checkout");
+    await Handler.assertionEquals(this.elementName, "Checkout");
   }
   async ValidateLinkedInElements(page) {
-    let elementName;
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.joinNowBtnLabel
     );
-    await Handler.assertionEquals(elementName, "Join now");
-    elementName = await Handler.getInnerHTML(
+    await Handler.assertionEquals(this.elementName, "Join now");
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.signInBtnLabel
     );
-    await Handler.assertionEquals(elementName, "Sign in");
-    elementName = await Handler.getInnerHTML(
+    await Handler.assertionEquals(this.elementName, "Sign in");
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.mainHeading
     );
     await Handler.assertionEquals(
-      elementName,
+      this.elementName,
       "Welcome to your professional community"
     );
-    elementName = await Handler.getInnerHTML(
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.emailPhoneNumberInputLabel
     );
-    await Handler.assertionEquals(elementName, "Email or phone number");
-    elementName = await Handler.getInnerHTML(
+    await Handler.assertionEquals(this.elementName, "Email or phone number");
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.passwordLabel
     );
-    await Handler.assertionEquals(elementName, "Password");
-    elementName = await Handler.getInnerHTML(
+    await Handler.assertionEquals(this.elementName, "Password");
+    this.elementName = await Handler.getInnerHTML(
       page,
       selector.LinkedIn.forgetPasswordLabel
     );
-    await Handler.assertionEquals(elementName, "Forgot password?");
+    await Handler.assertionEquals(this.elementName, "Forgot password?");
   }
 }
 module.exports = new Homepage();

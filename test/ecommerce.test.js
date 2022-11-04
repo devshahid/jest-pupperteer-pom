@@ -4,8 +4,7 @@ describe("Complete Registration Flow", () => {
   let page;
   beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto("http://tutorialsninja.com/demo/");
-    // await Homepage.visitpage(page, "http://tutorialsninja.com/demo/");
+    await Homepage.visitpage(page, "http://tutorialsninja.com/demo/");
     await page.setViewport({ width: 1300, height: 768 });
     await Homepage.navigateToActionScreen(page, "Register");
     await Homepage.validateRegisterScreen(page);
@@ -24,11 +23,10 @@ describe("Complete Registration Flow", () => {
 });
 
 describe("Complete Login Flow", () => {
-  let page, elementName;
+  let page;
   beforeEach(async () => {
     page = await browser.newPage();
     await Homepage.visitpage(page, "http://tutorialsninja.com/demo/");
-    // await page.goto("http://tutorialsninja.com/demo/");
     await page.setViewport({ width: 1300, height: 768 });
     await Homepage.navigateToActionScreen(page, "Login");
     await Loginpage.loginuser(page);
@@ -51,7 +49,7 @@ describe("Complete Login Flow", () => {
   it("Add Product to Cart", async () => {
     await Homepage.addProductToCart(page);
     await Homepage.validateAddedToCartMsg(page);
-    await Homepage.navigateToCartNavLink();
+    await Homepage.navigateToCartNavLink(page);
     await Homepage.clickContinueBtn(page);
     await Homepage.navigateToCheckout(page);
     await Homepage.removeItemFromCart(page);
