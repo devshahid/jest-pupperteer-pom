@@ -70,6 +70,52 @@ class Loginpage {
     elements.sort();
     expect(options).to.eql(elements);
   }
+  async signUpWithoutEmailAndValidate(page) {
+    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(page, selector.LinkedIn.errorlabels);
+
+    const options = await Handler.getArrayOfInnerHTML(
+      page,
+      selector.LinkedIn.errorlabels
+    );
+    options.sort();
+    let errorMsgs = [
+      "Please enter your email address or mobile number.",
+      "Please enter your password.",
+    ];
+    errorMsgs.sort();
+    expect(options).to.eql(errorMsgs);
+  }
+  async signUpWithEmailAndValidate(page) {
+    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+    await Handler.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("email-or-phone"),
+      "testing0909876@gmail.com"
+    );
+    await Handler.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("password"),
+      "0909876learning"
+    );
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(
+      page,
+      selector.LinkedIn.InputField("first-name")
+    );
+    await Handler.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("first-name"),
+      "learning"
+    );
+    await Handler.TypeOnLocator(
+      page,
+      selector.LinkedIn.InputField("last-name"),
+      "tester"
+    );
+    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+  }
 }
 module.exports = new Loginpage();
 module.exports.Loginpage = Loginpage;

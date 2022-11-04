@@ -143,6 +143,42 @@ class Homepage {
     );
     await Handler.assertionEquals(elementName, "Checkout");
   }
+  async ValidateLinkedInElements(page) {
+    let elementName;
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.joinNowBtnLabel
+    );
+    await Handler.assertionEquals(elementName, "Join now");
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.signInBtnLabel
+    );
+    await Handler.assertionEquals(elementName, "Sign in");
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.mainHeading
+    );
+    await Handler.assertionEquals(
+      elementName,
+      "Welcome to your professional community"
+    );
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.emailPhoneNumberInputLabel
+    );
+    await Handler.assertionEquals(elementName, "Email or phone number");
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.passwordLabel
+    );
+    await Handler.assertionEquals(elementName, "Password");
+    elementName = await Handler.getInnerHTML(
+      page,
+      selector.LinkedIn.forgetPasswordLabel
+    );
+    await Handler.assertionEquals(elementName, "Forgot password?");
+  }
 }
 module.exports = new Homepage();
 module.exports.Homepage = Homepage;
