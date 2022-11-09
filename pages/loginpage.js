@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const selector = require("../locators/locators");
 const Handler = require("../utils/handlers");
 class Loginpage {
-  async registerUser(page) {
+  async registerUser() {
     let emailadd = `${Handler.generateString(5)}@gmail.com`;
     let elementArr = [
       "firstname",
@@ -22,42 +22,33 @@ class Loginpage {
     ];
     for (let i in elementArr) {
       await Handler.TypeOnLocator(
-        page,
         selector.ecommerce.register_inputs(elementArr[i]),
         elementText[i]
       );
     }
-    await Handler.clickLocator(page, selector.ecommerce.actionBtn("checkbox"));
-    await Handler.clickLocator(page, selector.ecommerce.actionBtn("submit"));
+    await Handler.clickLocator(selector.ecommerce.actionBtn("checkbox"));
+    await Handler.clickLocator(selector.ecommerce.actionBtn("submit"));
   }
-  async logoutUser(page) {
-    await Handler.waitForXPath(page, selector.ecommerce.menuitem("My Account"));
-    page, selector.ecommerce.menuitem("My Account");
-    await Handler.clickLocatorXpath(
-      page,
-      selector.ecommerce.menuitem("My Account")
-    );
-    await Handler.clickLocatorXpath(
-      page,
-      selector.ecommerce.dropdown_item("Logout")
-    );
+  async logoutUser() {
+    await Handler.waitForXPath(selector.ecommerce.menuitem("My Account"));
+    selector.ecommerce.menuitem("My Account");
+    await Handler.clickLocatorXpath(selector.ecommerce.menuitem("My Account"));
+    await Handler.clickLocatorXpath(selector.ecommerce.dropdown_item("Logout"));
   }
-  async loginuser(page) {
-    await Handler.waitForSelector(page, selector.ecommerce.loginScreen);
+  async loginuser() {
+    await Handler.waitForSelector(selector.ecommerce.loginScreen);
     let elementArr = ["email", "password"];
     let elementText = ["user2@testing.com", "testuser"];
     for (let i in elementArr) {
       await Handler.TypeOnLocator(
-        page,
         selector.ecommerce.register_inputs(elementArr[i]),
         elementText[i]
       );
     }
-    await Handler.clickLocator(page, selector.ecommerce.actionBtn("submit"));
+    await Handler.clickLocator(selector.ecommerce.actionBtn("submit"));
   }
-  async validateLoginElements(page) {
+  async validateLoginElements() {
     let options = await Handler.getArrayOfInnerHTML(
-      page,
       selector.ecommerce.loginElements
     );
     options.sort();
@@ -70,13 +61,12 @@ class Loginpage {
     elements.sort();
     expect(options).to.eql(elements);
   }
-  async signUpWithoutEmailAndValidate(page) {
-    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
-    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
-    await Handler.waitForSelector(page, selector.LinkedIn.errorlabels);
+  async signUpWithoutEmailAndValidate() {
+    await Handler.clickLocator(selector.LinkedIn.joinNowBtnLabel);
+    await Handler.clickLocator(selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(selector.LinkedIn.errorlabels);
 
     const options = await Handler.getArrayOfInnerHTML(
-      page,
       selector.LinkedIn.errorlabels
     );
     options.sort();
@@ -87,34 +77,27 @@ class Loginpage {
     errorMsgs.sort();
     expect(options).to.eql(errorMsgs);
   }
-  async signUpWithEmailAndValidate(page) {
-    await Handler.clickLocator(page, selector.LinkedIn.joinNowBtnLabel);
+  async signUpWithEmailAndValidate() {
+    await Handler.clickLocator(selector.LinkedIn.joinNowBtnLabel);
     await Handler.TypeOnLocator(
-      page,
       selector.LinkedIn.InputField("email-or-phone"),
       "testing0909876@gmail.com"
     );
     await Handler.TypeOnLocator(
-      page,
       selector.LinkedIn.InputField("password"),
       "0909876learning"
     );
-    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
-    await Handler.waitForSelector(
-      page,
-      selector.LinkedIn.InputField("first-name")
-    );
+    await Handler.clickLocator(selector.LinkedIn.continueBtn);
+    await Handler.waitForSelector(selector.LinkedIn.InputField("first-name"));
     await Handler.TypeOnLocator(
-      page,
       selector.LinkedIn.InputField("first-name"),
       "learning"
     );
     await Handler.TypeOnLocator(
-      page,
       selector.LinkedIn.InputField("last-name"),
       "tester"
     );
-    await Handler.clickLocator(page, selector.LinkedIn.continueBtn);
+    await Handler.clickLocator(selector.LinkedIn.continueBtn);
   }
 }
 module.exports = new Loginpage();

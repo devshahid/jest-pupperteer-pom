@@ -1,29 +1,29 @@
 const { expect } = require("chai");
 class Handler {
-  async getInnerHTML(instance, locator) {
-    return await instance.$eval(locator, (el) => el.innerHTML);
+  async getInnerHTML(locator) {
+    return await page.$eval(locator, (el) => el.innerHTML);
   }
-  async getArrayOfInnerHTML(instance, locator) {
-    return await instance.$$eval(locator, (options) =>
+  async getArrayOfInnerHTML(locator) {
+    return await page.$$eval(locator, (options) =>
       options.map((option) => option.innerHTML.replace(/\n/g, "").trim())
     );
   }
-  async clickLocator(instance, locator) {
-    await instance.click(locator);
+  async clickLocator(locator) {
+    await page.click(locator);
   }
-  async clickLocatorXpath(instance, locator) {
-    await instance.waitForXPath(locator);
-    const [selectedElement] = await instance.$x(locator);
+  async clickLocatorXpath(locator) {
+    await page.waitForXPath(locator);
+    const [selectedElement] = await page.$x(locator);
     await selectedElement.click(locator);
   }
-  async waitForXPath(instance, locator) {
-    await instance.waitForXPath(locator);
+  async waitForXPath(locator) {
+    await page.waitForXPath(locator);
   }
-  async waitForSelector(instance, locator) {
-    await instance.waitForSelector(locator);
+  async waitForSelector(locator) {
+    await page.waitForSelector(locator);
   }
-  async TypeOnLocator(instance, locator, value) {
-    await instance.type(locator, value);
+  async TypeOnLocator(locator, value) {
+    await page.type(locator, value);
   }
 
   async assertionEquals(element, text) {

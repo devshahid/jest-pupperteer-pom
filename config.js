@@ -20,6 +20,14 @@ before(async () => {
   global.browser = await puppeteer.launch(opts);
 });
 
+beforeEach(async () => {
+  page = await browser.newPage();
+  await page.setViewport({ width: 1300, height: 768 });
+});
+afterEach(async () => {
+  await page.close();
+});
+
 /* call the function after puppeteer done testing */
 after(() => {
   browser.close();
